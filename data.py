@@ -1,5 +1,5 @@
-
 tb_knowledge_base = {
+
     "symptoms": [
         {
             "name": "Persistent Cough",
@@ -106,6 +106,53 @@ tb_knowledge_base = {
             "topic": "TB Testing",
             "information": "TB tests include tuberculin skin test (TST), interferon-gamma release assays (IGRAs), chest X-rays, sputum tests, and CT scans. Diagnosis often requires multiple tests to confirm active TB and determine drug sensitivity.",
             "keywords": ["testing", "diagnosis", "skin test", "x-ray", "sputum", "blood test"]
+        }
+    ],
+"faq": [
+        {
+            "question": "What are the symptoms of TB?",
+            "answer": "Common TB symptoms include a persistent cough (lasting over 3 weeks), fever, night sweats, weight loss, chest pain, and fatigue.",
+            "keywords": ["tb symptoms", "what are the symptoms of tb", "signs of tb", "how do I know if I have tb"]
+        },
+        {
+            "question": "Is TB curable?",
+            "answer": "Yes, TB is curable with proper treatment. Most people with TB are cured by taking a combination of medications for 6 to 9 months.",
+            "keywords": ["is tb curable", "can tb be cured", "tb cure"]
+        },
+        {
+            "question": "How is TB transmitted?",
+            "answer": "TB spreads through the air when an infected person coughs, sneezes, or speaks. It is not spread by touch, food, or casual contact.",
+            "keywords": ["how is tb transmitted", "can you catch tb by touching", "tb spread", "airborne tb"]
+        },
+        {
+            "question": "What is MDR-TB?",
+            "answer": "MDR-TB stands for Multi-Drug Resistant Tuberculosis. It doesn't respond to the two most powerful anti-TB drugs and needs second-line treatment.",
+            "keywords": ["what is mdr-tb", "drug resistant tb", "mdr meaning", "multi drug resistance"]
+        },
+        {
+            "question": "What is the difference between active and latent TB?",
+            "answer": "Active TB causes symptoms and is contagious. Latent TB means the bacteria are inactive; you have no symptoms and can't spread the disease.",
+            "keywords": ["active vs latent tb", "difference between active and latent tb", "inactive tb"]
+        },
+        {
+            "question": "Can TB be prevented?",
+            "answer": "Yes. TB prevention includes the BCG vaccine, avoiding close contact with infected people, using protective masks, and maintaining good health.",
+            "keywords": ["how to prevent tb", "tb prevention", "bcg vaccine", "avoid tb"]
+        },
+        {
+            "question": "Who is at high risk for TB?",
+            "answer": "People with HIV, diabetes, poor nutrition, smokers, those in crowded places, and healthcare workers are at higher risk for TB.",
+            "keywords": ["tb risk factors", "who gets tb", "tb vulnerable groups"]
+        },
+        {
+            "question": "How is TB diagnosed?",
+            "answer": "TB is diagnosed using tests like the skin test (TST), blood test (IGRA), chest X-rays, and sputum analysis.",
+            "keywords": ["how is tb diagnosed", "tb test", "diagnosis of tb"]
+        },
+        {
+            "question": "Is TB the same as pneumonia?",
+            "answer": "No, TB and pneumonia are different diseases. TB is a chronic infection caused by Mycobacterium tuberculosis and spreads through air.",
+            "keywords": ["tb vs pneumonia", "is tb pneumonia", "difference between tb and pneumonia"]
         }
     ]
 }
