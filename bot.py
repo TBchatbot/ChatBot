@@ -69,12 +69,19 @@ st.markdown("""
     .quick-topic:hover {
         background-color: #f9fafb;
     }
-    .emergency-card {
-        background-color: #fef2f2;
-        border: 1px solid #fecaca;
+    .faq-question {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: 1px solid #e5e7eb;
         border-radius: 0.5rem;
-        padding: 1rem;
-        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        background-color: #f9fafb;
+    }
+    .faq-answer {
+        padding: 0.5rem 1rem 1rem 1rem;
+        margin-bottom: 1rem;
+        border-left: 3px solid #3b82f6;
+        background-color: #f3f4f6;
     }
     .typing-indicator {
         display: flex;
@@ -112,6 +119,9 @@ def find_relevant_response(user_input):
     for info in tb_knowledge_base["general_info"]:
         if info["topic"].lower() in input_lower or any(keyword.lower() in input_lower for keyword in info["keywords"]):
             return f"{info['topic']}: {info['information']}"
+    for faq in tb_knowledge_base["faqs"]:
+        if faq["question"].lower() in input_lower:
+            return f"FAQ: {faq['answer']}"
     if any(word in input_lower for word in ["hello", "hi", "hey"]):
         return "Hello! I'm here to help you with tuberculosis-related questions. You can ask me about symptoms, treatment, prevention, or general TB information."
     if "help" in input_lower:
@@ -121,9 +131,10 @@ def find_relevant_response(user_input):
 • Prevention methods
 • General information about tuberculosis
 • Risk factors and transmission
+• Frequently Asked Questions (FAQs)
 
 What specific topic would you like to know about?"""
-    return "I understand you're asking about TB-related topics. Could you please be more specific? You can ask me about symptoms, treatment, prevention, or general information about tuberculosis. For example, try asking 'What are TB symptoms?' or 'How is TB treated?'"
+    return "I understand you're asking about TB-related topics. Could you please be more specific? You can ask me about symptoms, treatment, prevention, FAQs, or general information about tuberculosis. For example, try asking 'What are TB symptoms?' or 'What is latent TB?'"
 
 def format_time(timestamp):
     return timestamp.strftime("%H:%M")
@@ -140,6 +151,12 @@ def initialize_session_state():
         ]
     if "chat_started" not in st.session_state:
         st.session_state.chat_started = False
+    if "risk_score" not in st.session_state:
+        st.session_state.risk_score = None
+    if "show_risk_calc" not in st.session_state:
+        st.session_state.show_risk_calc = False
+    if "faq_open" not in st.session_state:
+        st.session_state.faq_open = {i: False for i in range(len(tb_knowledge_base["faqs"]))}
 
 def render_welcome_screen():
     st.markdown("<h1 style='text-align: center; color: #3b82f6; font-size: 3rem; margin-bottom: 1rem;'>TB Health Assistant</h1>", unsafe_allow_html=True)
@@ -183,43 +200,54 @@ def render_sidebar():
                 }
             ]
             st.session_state.chat_started = True
+            st.session_state.risk_score = None
+            st.session_state.show_risk_calc = False
             st.rerun()
+
         st.markdown("### Quick Topics")
         st.markdown("Jump to common TB questions")
         quick_topics = [
             {"icon": "🔥", "title": "Symptoms", "description": "Common TB symptoms", "query": "What are TB symptoms?"},
             {"icon": "💊", "title": "Treatment", "description": "Treatment options", "query": "How is TB treated?"},
             {"icon": "🛡️", "title": "Prevention", "description": "How to prevent TB", "query": "How can I prevent TB?"},
-            {"icon": "ℹ️", "title": "General Info", "description": "About tuberculosis", "query": "What is tuberculosis?"}
+            {"icon": "ℹ️", "title": "General Info", "description": "About tuberculosis", "query": "What is tuberculosis?"},
+            {"icon": "❓", "title": "FAQs", "description": "Frequently Asked Questions", "query": "Show me some TB FAQs"}
         ]
         for topic in quick_topics:
             if st.button(f"{topic['icon']} {topic['title']}", key=f"topic_{topic['title']}", help=topic['description']):
-                st.session_state.chat_started = True
-                user_message = {
-                    "id": str(len(st.session_state.messages) + 1),
-                    "text": topic['query'],
-                    "is_bot": False,
-                    "timestamp": datetime.now()
-                }
-                st.session_state.messages.append(user_message)
-                bot_response = find_relevant_response(topic['query'])
-                bot_message = {
-                    "id": str(len(st.session_state.messages) + 1),
-                    "text": bot_response,
-                    "is_bot": True,
-                    "timestamp": datetime.now()
-                }
-                st.session_state.messages.append(bot_message)
-                st.rerun()
+                if topic['title'] == "FAQs":
+                    st.session_state.faq_open = {i: False for i in range(len(tb_knowledge_base["faqs"]))}
+                    st.session_state.show_faqs = True
+                    st.session_state.chat_started = False
+                    st.session_state.show_risk_calc = False
+                    st.experimental_rerun()
+                else:
+                    st.session_state.chat_started = True
+                    user_message = {
+                        "id": str(len(st.session_state.messages) + 1),
+                        "text": topic['query'],
+                        "is_bot": False,
+                        "timestamp": datetime.now()
+                    }
+                    st.session_state.messages.append(user_message)
+                    bot_response = find_relevant_response(topic['query'])
+                    bot_message = {
+                        "id": str(len(st.session_state.messages) + 1),
+                        "text": bot_response,
+                        "is_bot": True,
+                        "timestamp": datetime.now()
+                    }
+                    st.session_state.messages.append(bot_message)
+                    st.session_state.show_risk_calc = False
+                    st.experimental_rerun()
+
         st.markdown("---")
-        st.markdown("""
-        <div class="emergency-card">
-            <h4 style="color: #dc2626; margin-bottom: 0.5rem;">🚨 Emergency</h4>
-            <p style="font-size: 0.875rem; color: #b91c1c; margin-bottom: 1rem;">If you're experiencing severe symptoms, seek immediate medical attention.</p>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("🏥 Find Nearest Hospital", key="emergency"):
-            st.error("Please contact your local emergency services or visit the nearest hospital immediately.")
+        st.markdown("### TB Risk Calculator")
+        if st.button("Open Risk Calculator", key="open_risk_calc"):
+            st.session_state.show_risk_calc = True
+            st.session_state.chat_started = False
+            st.session_state.show_faqs = False
+            st.experimental_rerun()
 
 def render_chat_message(message):
     if message["is_bot"]:
@@ -266,7 +294,7 @@ def render_chat_interface():
     with col1:
         user_input = st.text_input(
             "Message",
-            placeholder="Ask me about TB symptoms, treatment, prevention...",
+            placeholder="Ask me about TB symptoms, treatment, prevention, FAQs...",
             key="user_input",
             label_visibility="collapsed"
         )
@@ -290,56 +318,66 @@ def render_chat_interface():
             "timestamp": datetime.now()
         }
         st.session_state.messages.append(bot_message)
-        st.rerun()
+        st.experimental_rerun()
+
     st.markdown("""
     <p style="text-align: center; font-size: 0.75rem; color: #9ca3af; margin-top: 1rem;">
         This chatbot provides educational information only. Consult healthcare professionals for medical advice.
     </p>
     """, unsafe_allow_html=True)
 
+def render_faqs():
+    st.title("Frequently Asked Questions (FAQs)")
+    for i, faq in enumerate(tb_knowledge_base["faqs"]):
+        if st.session_state.faq_open.get(i):
+            if st.button(f"▼ {faq['question']}", key=f"faq_close_{i}"):
+                st.session_state.faq_open[i] = False
+                st.experimental_rerun()
+            st.markdown(f"<div class='faq-answer'>{faq['answer']}</div>", unsafe_allow_html=True)
+        else:
+            if st.button(f"▶ {faq['question']}", key=f"faq_open_{i}"):
+                st.session_state.faq_open[i] = True
+                st.experimental_rerun()
+    if st.button("Back to Home"):
+        st.session_state.faq_open = {i: False for i in range(len(tb_knowledge_base["faqs"]))}
+        st.session_state.chat_started = True
+        st.session_state.show_faqs = False
+        st.experimental_rerun()
+
+def render_risk_calculator():
+    st.title("TB Risk Percentage Calculator")
+    st.markdown("Select symptoms you are experiencing:")
+    symptom_checks = {}
+    for symptom in tb_knowledge_base["symptoms"]:
+        symptom_checks[symptom["name"]] = st.checkbox(symptom["name"])
+    if st.button("Calculate Risk"):
+        score = sum(20 for present in symptom_checks.values() if present)
+        st.session_state.risk_score = score
+        st.success(f"Your estimated TB risk is {score}%.")
+        if score >= 60:
+            st.warning("High risk detected. Please consult a healthcare professional immediately.")
+        elif score >= 30:
+            st.info("Moderate risk. Consider consulting a healthcare professional.")
+        else:
+            st.info("Low risk, but stay alert and monitor symptoms.")
+    if st.session_state.risk_score is not None:
+        st.markdown(f"### Last Calculated Risk: {st.session_state.risk_score}%")
+    if st.button("Back to Home"):
+        st.session_state.show_risk_calc = False
+        st.session_state.chat_started = True
+        st.experimental_rerun()
+
 def main():
     initialize_session_state()
     render_sidebar()
-    if not st.session_state.chat_started:
-        render_welcome_screen()
-    else:
+    if getattr(st.session_state, "show_faqs", False):
+        render_faqs()
+    elif st.session_state.show_risk_calc:
+        render_risk_calculator()
+    elif st.session_state.chat_started:
         render_chat_interface()
-
-def search_faq(user_input, faq_data):
-    user_input_lower = user_input.lower()
-    for item in faq_data:
-        for keyword in item["keywords"]:
-            if keyword in user_input_lower:
-                return item["answer"]
-    return None
-
-def get_bot_response(user_input):
-    faq_response = search_faq(user_input, tb_knowledge_base["faq"])
-    if faq_response:
-        return faq_response
-
-    for symptom in tb_knowledge_base["symptoms"]:
-        for keyword in symptom["keywords"]:
-            if keyword in user_input.lower():
-                return f"{symptom['name']}: {symptom['description']}"
-
-    for treatment in tb_knowledge_base["treatments"]:
-        for keyword in treatment["keywords"]:
-            if keyword in user_input.lower():
-                return f"{treatment['name']}: {treatment['description']}"
-
-    for prevention in tb_knowledge_base["prevention"]:
-        for keyword in prevention["keywords"]:
-            if keyword in user_input.lower():
-                return f"{prevention['topic']}: {prevention['advice']}"
-
-    for info in tb_knowledge_base["general_info"]:
-        for keyword in info["keywords"]:
-            if keyword in user_input.lower():
-                return f"{info['topic']}: {info['information']}"
-
-    return "I'm sorry, I couldn't find information on that. Please try rephrasing your question."
-
+    else:
+        render_welcome_screen()
 
 if __name__ == "__main__":
     main()

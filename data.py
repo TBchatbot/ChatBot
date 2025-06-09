@@ -1,158 +1,97 @@
 tb_knowledge_base = {
-
     "symptoms": [
         {
-            "name": "Persistent Cough",
-            "description": "A cough that lasts 3 weeks or longer, often producing mucus or blood. This is one of the most common signs of pulmonary tuberculosis.",
-            "keywords": ["cough", "persistent cough", "chronic cough", "blood", "mucus", "sputum"]
+            "name": "Cough",
+            "description": "A persistent cough lasting more than 2 weeks, sometimes with blood-tinged sputum.",
+            "keywords": ["cough", "coughing", "persistent cough"]
         },
         {
             "name": "Fever",
-            "description": "Low-grade fever that may come and go, often accompanied by night sweats. Body temperature may range from 99-101°F (37-38°C).",
-            "keywords": ["fever", "temperature", "hot", "feverish"]
+            "description": "Low-grade fever lasting for several weeks.",
+            "keywords": ["fever", "temperature", "high temperature"]
         },
         {
             "name": "Night Sweats",
-            "description": "Excessive sweating during sleep that soaks clothing and bedding. This occurs even in cool environments and is a classic TB symptom.",
-            "keywords": ["night sweats", "sweating", "sweat", "drenched", "wet"]
+            "description": "Excessive sweating during the night.",
+            "keywords": ["night sweats", "sweating at night"]
         },
         {
             "name": "Weight Loss",
-            "description": "Unexplained weight loss and loss of appetite. People with TB often lose weight without trying, which may be significant over weeks or months.",
-            "keywords": ["weight loss", "appetite", "skinny", "thin", "losing weight"]
+            "description": "Unintended weight loss over a short period.",
+            "keywords": ["weight loss", "losing weight"]
         },
         {
             "name": "Fatigue",
-            "description": "Extreme tiredness and weakness that doesn't improve with rest. This can significantly impact daily activities and quality of life.",
-            "keywords": ["tired", "fatigue", "weakness", "exhausted", "weak", "energy"]
-        },
-        {
-            "name": "Chest Pain",
-            "description": "Pain in the chest that may worsen with breathing or coughing. This can indicate inflammation in the lungs or surrounding tissues.",
-            "keywords": ["chest pain", "breathing pain", "lung pain", "chest hurt"]
+            "description": "Feeling very tired or weak.",
+            "keywords": ["fatigue", "tiredness", "weakness"]
         }
     ],
     "treatments": [
         {
-            "name": "First-line Anti-TB Drugs",
-            "description": "Standard treatment includes 4 medications: Isoniazid, Rifampin, Ethambutol, and Pyrazinamide (HRZE). Treatment typically lasts 6-9 months with an intensive phase (2 months) followed by a continuation phase (4-7 months).",
-            "keywords": ["medication", "drugs", "treatment", "isoniazid", "rifampin", "ethambutol", "pyrazinamide"]
+            "name": "Antibiotics",
+            "description": "TB is treated with a combination of antibiotics taken over at least 6 months.",
+            "keywords": ["antibiotics", "medication", "treatment"]
         },
         {
             "name": "Directly Observed Therapy (DOT)",
-            "description": "A healthcare worker or trained volunteer watches the patient take each dose of medication. This ensures proper adherence and reduces the risk of drug resistance.",
-            "keywords": ["DOT", "observed therapy", "supervision", "adherence"]
-        },
-        {
-            "name": "Drug-Resistant TB Treatment",
-            "description": "MDR-TB and XDR-TB require specialized treatment with second-line drugs. Treatment may last 12-24 months and includes medications like fluoroquinolones and injectable drugs.",
-            "keywords": ["resistant", "MDR", "XDR", "second-line", "drug resistance"]
-        },
-        {
-            "name": "Latent TB Treatment",
-            "description": "People with latent TB infection may be treated with isoniazid for 9 months, rifampin for 4 months, or isoniazid and rifapentine for 3 months to prevent active disease.",
-            "keywords": ["latent", "prevention", "inactive TB", "LTBI"]
+            "description": "Healthcare workers supervise the patient to ensure medication adherence.",
+            "keywords": ["DOT", "supervised therapy"]
         }
     ],
     "prevention": [
         {
-            "topic": "BCG Vaccine",
-            "advice": "The Bacille Calmette-Guérin (BCG) vaccine provides protection against severe forms of TB in children. It's given at birth in countries with high TB burden but has variable effectiveness in adults.",
-            "keywords": ["vaccine", "BCG", "immunization", "shot"]
+            "topic": "Vaccination",
+            "advice": "BCG vaccine provides protection against TB, especially severe forms in children.",
+            "keywords": ["vaccine", "vaccination", "BCG"]
         },
         {
-            "topic": "Infection Control",
-            "advice": "Use proper ventilation, wear N95 masks in high-risk settings, cover mouth when coughing, and isolate infectious patients. UV light and air filtration can help reduce transmission risk.",
-            "keywords": ["mask", "ventilation", "isolation", "air", "transmission"]
+            "topic": "Avoid Exposure",
+            "advice": "Avoid close contact with people who have active TB until they are treated.",
+            "keywords": ["avoid exposure", "prevent transmission"]
         },
         {
-            "topic": "Contact Screening",
-            "advice": "People who have been in close contact with someone with active TB should be tested for infection. This includes family members, coworkers, and healthcare providers.",
-            "keywords": ["contact", "screening", "testing", "family", "exposure"]
-        },
-        {
-            "topic": "Risk Factor Reduction",
-            "advice": "Maintain good nutrition, manage diabetes, avoid smoking and excessive alcohol, treat HIV appropriately, and maintain good overall health to reduce TB susceptibility.",
-            "keywords": ["nutrition", "diabetes", "smoking", "alcohol", "HIV", "immune system"]
+            "topic": "Good Ventilation",
+            "advice": "Keep living spaces well ventilated to reduce TB transmission risk.",
+            "keywords": ["ventilation", "air flow", "fresh air"]
         }
     ],
     "general_info": [
         {
-            "topic": "What is Tuberculosis",
-            "information": "Tuberculosis (TB) is an infectious disease caused by Mycobacterium tuberculosis bacteria. It primarily affects the lungs (pulmonary TB) but can affect other parts of the body (extrapulmonary TB). TB is spread through the air when people with active pulmonary TB cough, sneeze, or spit.",
-            "keywords": ["what is TB", "tuberculosis", "mycobacterium", "bacteria", "infectious disease"]
+            "topic": "What is Tuberculosis?",
+            "information": "Tuberculosis (TB) is a contagious bacterial infection caused by Mycobacterium tuberculosis, primarily affecting the lungs.",
+            "keywords": ["tuberculosis", "tb", "disease"]
         },
         {
-            "topic": "TB Transmission",
-            "information": "TB spreads through airborne droplets when someone with active pulmonary TB coughs, sneezes, speaks, or sings. You cannot get TB from sharing food, touching surfaces, shaking hands, or other casual contact. Close, prolonged contact with an infectious person increases transmission risk.",
-            "keywords": ["spread", "transmission", "contagious", "airborne", "how do you get TB"]
+            "topic": "How is TB Spread?",
+            "information": "TB spreads through the air when people with active TB cough, sneeze, or talk.",
+            "keywords": ["spread", "transmission", "airborne"]
         },
         {
-            "topic": "Active vs Latent TB",
-            "information": "Latent TB means you're infected but not sick - bacteria are inactive and you can't spread TB. Active TB means bacteria are multiplying, you have symptoms, and may spread TB to others. About 5-10% of people with latent TB develop active TB in their lifetime.",
-            "keywords": ["active TB", "latent TB", "inactive", "difference"]
-        },
-        {
-            "topic": "TB Statistics",
-            "information": "TB is one of the top 10 causes of death worldwide. In 2022, an estimated 10.6 million people fell ill with TB globally. TB is the leading killer of people with HIV and a major cause of antimicrobial resistance deaths.",
-            "keywords": ["statistics", "numbers", "deaths", "global", "worldwide"]
-        },
-        {
-            "topic": "Risk Factors",
-            "information": "Higher risk groups include people with HIV, diabetes, malnutrition, those who smoke or use tobacco, people with silicosis, healthcare workers, people in crowded living conditions, and those with weakened immune systems.",
-            "keywords": ["risk factors", "who gets TB", "high risk", "vulnerable"]
-        },
-        {
-            "topic": "TB Testing",
-            "information": "TB tests include tuberculin skin test (TST), interferon-gamma release assays (IGRAs), chest X-rays, sputum tests, and CT scans. Diagnosis often requires multiple tests to confirm active TB and determine drug sensitivity.",
-            "keywords": ["testing", "diagnosis", "skin test", "x-ray", "sputum", "blood test"]
+            "topic": "Latent TB Infection",
+            "information": "People with latent TB have the bacteria in their body but do not have symptoms and are not contagious.",
+            "keywords": ["latent", "latent tb", "infection"]
         }
     ],
-"faq": [
+    "faqs": [
         {
-            "question": "What are the symptoms of TB?",
-            "answer": "Common TB symptoms include a persistent cough (lasting over 3 weeks), fever, night sweats, weight loss, chest pain, and fatigue.",
-            "keywords": ["tb symptoms", "what are the symptoms of tb", "signs of tb", "how do I know if I have tb"]
+            "question": "Can TB be cured?",
+            "answer": "Yes, TB can be cured with proper medical treatment using antibiotics for the full course."
         },
         {
-            "question": "Is TB curable?",
-            "answer": "Yes, TB is curable with proper treatment. Most people with TB are cured by taking a combination of medications for 6 to 9 months.",
-            "keywords": ["is tb curable", "can tb be cured", "tb cure"]
+            "question": "How long does TB treatment take?",
+            "answer": "Treatment usually lasts at least 6 months, depending on the patient's condition and drug susceptibility."
         },
         {
-            "question": "How is TB transmitted?",
-            "answer": "TB spreads through the air when an infected person coughs, sneezes, or speaks. It is not spread by touch, food, or casual contact.",
-            "keywords": ["how is tb transmitted", "can you catch tb by touching", "tb spread", "airborne tb"]
+            "question": "Is TB contagious during treatment?",
+            "answer": "People with active TB can be contagious until they have taken appropriate treatment for a few weeks and symptoms improve."
         },
         {
-            "question": "What is MDR-TB?",
-            "answer": "MDR-TB stands for Multi-Drug Resistant Tuberculosis. It doesn't respond to the two most powerful anti-TB drugs and needs second-line treatment.",
-            "keywords": ["what is mdr-tb", "drug resistant tb", "mdr meaning", "multi drug resistance"]
+            "question": "Who is at risk for TB?",
+            "answer": "People with weakened immune systems, close contacts of TB patients, healthcare workers, and those living in crowded conditions are at higher risk."
         },
         {
-            "question": "What is the difference between active and latent TB?",
-            "answer": "Active TB causes symptoms and is contagious. Latent TB means the bacteria are inactive; you have no symptoms and can't spread the disease.",
-            "keywords": ["active vs latent tb", "difference between active and latent tb", "inactive tb"]
-        },
-        {
-            "question": "Can TB be prevented?",
-            "answer": "Yes. TB prevention includes the BCG vaccine, avoiding close contact with infected people, using protective masks, and maintaining good health.",
-            "keywords": ["how to prevent tb", "tb prevention", "bcg vaccine", "avoid tb"]
-        },
-        {
-            "question": "Who is at high risk for TB?",
-            "answer": "People with HIV, diabetes, poor nutrition, smokers, those in crowded places, and healthcare workers are at higher risk for TB.",
-            "keywords": ["tb risk factors", "who gets tb", "tb vulnerable groups"]
-        },
-        {
-            "question": "How is TB diagnosed?",
-            "answer": "TB is diagnosed using tests like the skin test (TST), blood test (IGRA), chest X-rays, and sputum analysis.",
-            "keywords": ["how is tb diagnosed", "tb test", "diagnosis of tb"]
-        },
-        {
-            "question": "Is TB the same as pneumonia?",
-            "answer": "No, TB and pneumonia are different diseases. TB is a chronic infection caused by Mycobacterium tuberculosis and spreads through air.",
-            "keywords": ["tb vs pneumonia", "is tb pneumonia", "difference between tb and pneumonia"]
+            "question": "What are the common symptoms of TB?",
+            "answer": "Common symptoms include persistent cough, fever, night sweats, weight loss, and fatigue."
         }
     ]
 }
