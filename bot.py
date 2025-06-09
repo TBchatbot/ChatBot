@@ -313,16 +313,6 @@ def search_faq(user_input, faq_data):
                 return item["answer"]
     return None
 
-from data import tb_knowledge_base
-
-def search_faq(user_input, faq_data):
-    user_input_lower = user_input.lower()
-    for item in faq_data:
-        for keyword in item["keywords"]:
-            if keyword in user_input_lower:
-                return item["answer"]
-    return None
-
 def get_bot_response(user_input):
     faq_response = search_faq(user_input, tb_knowledge_base["faq"])
     if faq_response:
